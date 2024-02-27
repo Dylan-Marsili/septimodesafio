@@ -1,0 +1,11 @@
+
+    <h1>Bienvenido a la aplicación</h1>
+    {{#if user}}
+    <p>Nombre: {{user.name}}</p>
+    <p>Correo Electrónico: {{user.email}}</p>
+    <p>Rol: {{user.role}}</p>
+    <a href="/auth/logout">Cerrar Sesión</a>
+    {{else}}
+    <p>Debes iniciar sesión para ver esta página.</p>
+    <a href="/auth/login">Iniciar Sesión</a>
+    {{/if}}

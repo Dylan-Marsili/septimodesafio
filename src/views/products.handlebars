@@ -1,0 +1,38 @@
+
+    <h1>Listado de Productos</h1>
+    {{#each products}}
+        <div>
+            <h2>{{title}}</h2>
+            <p>Descripción: {{description}}</p>
+            <p>Código: {{code}}</p>
+            <p>Precio: {{price}}</p>
+            <p>Estado: {{#if status}} Disponible {{else}} Agotado {{/if}}</p>
+            <p>Stock: {{stock}}</p>
+            <p>Categoría: {{category}}</p>
+            {{#if thumbnails.length}}
+                <ul>
+                    {{#each thumbnails}}
+                        <li><img src="{{this}}" alt="Thumbnail"></li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+            <a href="/products/{{_id}}">Ver Detalles</a>
+            <form action="/api/carts/{{cartId}}/products/{{_id}}" method="post">
+                <button type="submit">Agregar al Carrito</button>
+            </form>
+        </div>
+    {{/each}}
+
+    <!-- Paginación -->
+    {{#if totalPages}}
+        <div>
+            {{#if prevPage}}
+                <a href="?page={{prevPage}}">&lt; Anterior</a>
+            {{/if}}
+            Página {{page}} de {{totalPages}}
+            {{#if nextPage}}
+                <a href="?page={{nextPage}}">Siguiente &gt;</a>
+            {{/if}}
+        </div>
+    {{/if}}
+
