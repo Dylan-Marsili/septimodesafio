@@ -3,19 +3,19 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import passport from 'passport';
 import flash from 'express-flash';
-import expressHandlebars from 'express-handlebars';
+import { engine } from 'express-handlebars';
 import dotenv from 'dotenv';
 import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
 import authRouter from './routes/auth.router.js';
 import viewsRouter from './routes/views.router.js';
-import ViewsController from './controllers/views.controller.js';
+import __dirname from './utils.js';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-
+console.log(process.env.MONGODB_URI)
 // Conectar a MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -32,11 +32,11 @@ db.once('open', () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Configuración de Express Handlebars
-const viewsController = new ViewsController();
-app.engine('.handlebars', expressHandlebars({ extname: '.handlebars' }));
+
+app.engine('.handlebars', engine({ extname: '.handlebars' }));
 app.set('view engine', '.handlebars');
-app.set('views', 'views');
+app.set('views', `${__dirname}/views`);
+
 
 // Configuración de sesiones y autenticación
 app.use(

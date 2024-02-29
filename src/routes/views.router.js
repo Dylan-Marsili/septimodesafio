@@ -1,12 +1,13 @@
 // views.router.js
-import express from 'express';
-import * as viewsController from '../controllers/viewsController.js';
+import { Router } from 'express';
+import viewsControllerr from '../controllers/views.controller.js';
 
-const router = express.Router();
+const viewsRouter = Router();
 
-// Rutas de vistas
-router.get('/products', viewsController.renderProductList);
-router.get('/products/:pid', viewsController.renderProductDetails);
-router.get('/carts/:cid', viewsController.renderCartDetails);
+const viewsController = new viewsControllerr()
 
-export default router;
+viewsRouter.get('/products', viewsController.renderProducts);
+viewsRouter.get('/products/:pid', viewsController.renderProductDetails);
+viewsRouter.get('/cart/:cid', viewsController.renderCart);
+
+export default viewsRouter;
