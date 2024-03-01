@@ -57,7 +57,7 @@ app.use(flash());
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/auth', authRouter);
-app.use('/views', viewsRouter);
+app.use('/', viewsRouter);
 
 // Configurar rutas para manejar páginas no encontradas o errores
 app.use((req, res, next) => {
